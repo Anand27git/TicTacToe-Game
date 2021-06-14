@@ -7,7 +7,8 @@ import java.util.Scanner;
  * @author ANAND 
  * purpose : Workshop of TicTacToeGame 
  * UC-1 create TicTacToeGame Board
- * UC-2 choose Symbol For Players
+ * UC-2 choose Symbol For Players 
+ * UC-3 show TicTacToe Game Board
  *
  ****************************************/
 public class TicTacToe {
@@ -23,7 +24,7 @@ public class TicTacToe {
 		}
 	}
 
-	// ask Player to choose either X or O  UC-2
+	// ask Player to choose either X or O UC-2
 	public char chooseSymbolForPlayer(char playerLetter) {
 		char computerLetter = ' ';
 		if (playerLetter == 'X' || playerLetter == 'x') {
@@ -32,6 +33,16 @@ public class TicTacToe {
 			computerLetter = 'X';
 		}
 		return computerLetter;
+	}
+
+	// method to show the board UC-3
+	public void showBoard() {
+		System.out.println("Current TicTacToe Game Board: ");
+		System.out.println(board[1] + " | " + board[2] + " | " + board[3]);
+		System.out.println(" ------- ");
+		System.out.println(board[4] + " | " + board[5] + " | " + board[6]);
+		System.out.println(" ------- ");
+		System.out.println(board[7] + " | " + board[8] + " | " + board[9]);
 	}
 
 	public static void main(String args[]) {
@@ -45,5 +56,6 @@ public class TicTacToe {
 		char computerSymbol = tictactoe.chooseSymbolForPlayer(playerLetter);
 		System.out.println("Player Letter is : " + playerLetter);
 		System.out.println("Computer Letter is : " + computerSymbol);
+		tictactoe.showBoard();
 	}
 }
