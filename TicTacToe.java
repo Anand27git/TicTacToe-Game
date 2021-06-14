@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 /**************************************
  * 
- * @author ANAND 
+ * @author ANAND
  * purpose : Workshop of TicTacToeGame 
- * UC-1 create TicTacToeGame Board
+ * UC-1 create TicTacToeGame Board 
  * UC-2 choose Symbol For Players 
  * UC-3 show TicTacToe Game Board
- *
+ * 
  ****************************************/
 public class TicTacToe {
 
