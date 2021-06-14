@@ -9,6 +9,7 @@ import java.util.Scanner;
  * UC-1 create TicTacToeGame Board 
  * UC-2 choose Symbol For Players 
  * UC-3 show TicTacToe Game Board
+ * UC-4 Make Player Move to Position
  * 
  ****************************************/
 public class TicTacToe {
@@ -45,6 +46,30 @@ public class TicTacToe {
 		System.out.println(board[7] + " | " + board[8] + " | " + board[9]);
 	}
 
+	// method to make player to move the position UC-4
+	public void playerMakeMove(char playerLetter) {
+
+		int boardposition;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the location where you  need to put symbol: ");
+		boardposition = sc.nextInt();
+		if (boardposition >= 1 && boardposition <= 9) {
+
+			if (board[boardposition] == ' ') {
+				board[boardposition] = playerLetter;
+			} else {
+				System.out.println(" The position is Already filled");
+			}
+		}
+	}
+
+	public static char chooseuserinput(Scanner userinput) {
+		{
+			System.out.print("Chooseyour Letter");
+			return userinput.next().toUpperCase().charAt(0);
+		}
+	}
+
 	public static void main(String args[]) {
 		System.out.println("Welcome to TicTocToe Game ");
 		// creating object for create board
@@ -56,6 +81,8 @@ public class TicTacToe {
 		char computerSymbol = tictactoe.chooseSymbolForPlayer(playerLetter);
 		System.out.println("Player Letter is : " + playerLetter);
 		System.out.println("Computer Letter is : " + computerSymbol);
+		tictactoe.showBoard();
+		tictactoe.playerMakeMove(playerLetter);
 		tictactoe.showBoard();
 	}
 }
