@@ -1,10 +1,13 @@
 package com.bridgelabz.tictactoegame;
 
+import java.util.Scanner;
+
 /**************************************
  * 
  * @author ANAND 
  * purpose : Workshop of TicTacToeGame 
  * UC-1 create TicTacToeGame Board
+ * UC-2 choose Symbol For Players
  *
  ****************************************/
 public class TicTacToe {
@@ -20,10 +23,27 @@ public class TicTacToe {
 		}
 	}
 
+	// ask Player to choose either X or O  UC-2
+	public char chooseSymbolForPlayer(char playerLetter) {
+		char computerLetter = ' ';
+		if (playerLetter == 'X' || playerLetter == 'x') {
+			computerLetter = 'O';
+		} else if (playerLetter == 'O' || playerLetter == 'o') {
+			computerLetter = 'X';
+		}
+		return computerLetter;
+	}
+
 	public static void main(String args[]) {
 		System.out.println("Welcome to TicTocToe Game ");
 		// creating object for create board
 		TicTacToe tictactoe = new TicTacToe();
 		tictactoe.createBoard();
+		System.out.println("Enter the symbol X or O:");
+		Scanner sc = new Scanner(System.in);
+		char playerLetter = sc.next().charAt(0);
+		char computerSymbol = tictactoe.chooseSymbolForPlayer(playerLetter);
+		System.out.println("Player Letter is : " + playerLetter);
+		System.out.println("Computer Letter is : " + computerSymbol);
 	}
 }
