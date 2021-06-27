@@ -4,22 +4,22 @@ import java.util.Scanner;
 
 /**************************************
  * 
- * @author ANAND
+ * @author ANAND 
  * purpose : Workshop of TicTacToeGame 
  * UC-1 create TicTacToeGame Board 
  * UC-2 choose Symbol For Players 
  * UC-3 show TicTacToe Game Board
  * UC-4 Make Player Move to Position
+ * UC-5 Check free space before  move
  * 
  ****************************************/
 public class TicTacToe {
 
 	// declared char array
-	char[] board = new char[10];
+	static char[] board = new char[10];
 
 	// method to create Board UC-1
 	public void createBoard() {
-
 		for (int position = 1; position < board.length; position++) {
 			board[position] = ' ';
 		}
@@ -47,26 +47,30 @@ public class TicTacToe {
 	}
 
 	// method to make player to move the position UC-4
-	public void playerMakeMove(char playerLetter) {
-
-		int boardposition;
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the location where you  need to put symbol: ");
-		boardposition = sc.nextInt();
-		if (boardposition >= 1 && boardposition <= 9) {
-
-			if (board[boardposition] == ' ') {
-				board[boardposition] = playerLetter;
+	public void playerMakeMove(Scanner input, char playerLetter) {
+		boolean isLocationFree;
+		int boardLocation;
+		do {
+			System.out.println("Enter the location (1-9) to put symbol: ");
+			boardLocation = input.nextInt();
+			isLocationFree = false;
+			if (boardLocation >= 1 && boardLocation <= 9) {
+				isLocationFree = checkIfPositionFree(boardLocation);
 			} else {
-				System.out.println(" The position is Already filled");
+				System.out.println("Invalid position entered.");
 			}
-		}
+		} while (!isLocationFree);
+		board[boardLocation] = playerLetter;
+		showBoard();
 	}
 
-	public static char chooseuserinput(Scanner userinput) {
-		{
-			System.out.print("Chooseyour Letter");
-			return userinput.next().toUpperCase().charAt(0);
+	// UC5 checking the place is free or already filled
+	public boolean checkIfPositionFree(int boardLocation) {
+		if (board[boardLocation] == ' ') {
+			return true;
+		} else {
+			System.out.println("Already filled");
+			return false;
 		}
 	}
 
@@ -81,8 +85,8 @@ public class TicTacToe {
 		char computerSymbol = tictactoe.chooseSymbolForPlayer(playerLetter);
 		System.out.println("Player Letter is : " + playerLetter);
 		System.out.println("Computer Letter is : " + computerSymbol);
-		tictactoe.showBoard();
-		tictactoe.playerMakeMove(playerLetter);
+		tictactoe.playerMakeMove(sc, playerLetter);
+		tictactoe.playerMakeMove(sc, computerSymbol);
 		tictactoe.showBoard();
 	}
 }
