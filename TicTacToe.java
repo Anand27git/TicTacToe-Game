@@ -11,12 +11,15 @@ import java.util.Scanner;
  * UC-3 show TicTacToe Game Board
  * UC-4 Make Player Move to Position
  * UC-5 Check free space before  move
+ * UC-6 TOSS TO Check who is playing first
  * 
  ****************************************/
 public class TicTacToe {
 
 	// declared char array
 	static char[] board = new char[10];
+	private final static int HEAD = 0;
+	private final static int TAIL = 1;
 
 	// method to create Board UC-1
 	public void createBoard() {
@@ -64,7 +67,7 @@ public class TicTacToe {
 		showBoard();
 	}
 
-	// UC5 checking the place is free or already filled
+	// method checking the place is free or already filled UC-5
 	public boolean checkIfPositionFree(int boardLocation) {
 		if (board[boardLocation] == ' ') {
 			return true;
@@ -72,6 +75,17 @@ public class TicTacToe {
 			System.out.println("Already filled");
 			return false;
 		}
+	}
+
+	// method to check which player is first using random number UC-6
+	public String checkWhoPlaysFirst() {
+		int toss = (int) (Math.random() * 10) % 2;
+		if (toss == HEAD) {
+			return "Player is first";
+		} else if (toss == TAIL) {
+			return "Computer is first";
+		}
+		return null;
 	}
 
 	public static void main(String args[]) {
@@ -88,5 +102,7 @@ public class TicTacToe {
 		tictactoe.playerMakeMove(sc, playerLetter);
 		tictactoe.playerMakeMove(sc, computerSymbol);
 		tictactoe.showBoard();
+		String first = tictactoe.checkWhoPlaysFirst();
+		System.out.println("here who Plays first: " + first);
 	}
 }
