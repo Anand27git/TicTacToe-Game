@@ -51,18 +51,18 @@ public class TicTacToe {
 
 	// method to make player to move the position UC-4
 	public void playerMakeMove(Scanner input, char playerLetter) {
-		boolean isLocationFree;
+		boolean isPositionFree;
 		int boardLocation;
 		do {
 			System.out.println("Enter the location (1-9) to put symbol: ");
 			boardLocation = input.nextInt();
-			isLocationFree = false;
+			isPositionFree = false;
 			if (boardLocation >= 1 && boardLocation <= 9) {
-				isLocationFree = checkIfPositionFree(boardLocation);
+				isPositionFree = checkIfPositionFree(boardLocation);
 			} else {
 				System.out.println("Invalid position entered.");
 			}
-		} while (!isLocationFree);
+		} while (!isPositionFree);
 		board[boardLocation] = playerLetter;
 		showBoard();
 	}
