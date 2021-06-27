@@ -12,6 +12,7 @@ import java.util.Scanner;
  * UC-4 Make Player Move to Position
  * UC-5 Check free space before  move
  * UC-6 TOSS TO Check who is playing first
+ * UC-7 Check player won the game
  * 
  ****************************************/
 public class TicTacToe {
@@ -88,6 +89,21 @@ public class TicTacToe {
 		return null;
 	}
 
+	// method to check player wines or change turn UC-7
+	public boolean getWinner(char playerSymbol) {
+		if ((board[1] == playerSymbol && board[2] == playerSymbol && board[3] == playerSymbol)
+				|| (board[4] == playerSymbol && board[5] == playerSymbol && board[6] == playerSymbol)
+				|| (board[7] == playerSymbol && board[8] == playerSymbol && board[9] == playerSymbol)
+				|| (board[1] == playerSymbol && board[5] == playerSymbol && board[9] == playerSymbol)
+				|| (board[3] == playerSymbol && board[5] == playerSymbol && board[7] == playerSymbol)
+				|| (board[1] == playerSymbol && board[4] == playerSymbol && board[7] == playerSymbol)
+				|| (board[2] == playerSymbol && board[5] == playerSymbol && board[8] == playerSymbol)
+				|| (board[3] == playerSymbol && board[6] == playerSymbol && board[9] == playerSymbol))
+			return true;
+
+		return false;
+	}
+
 	public static void main(String args[]) {
 		System.out.println("Welcome to TicTocToe Game ");
 		// creating object for create board
@@ -97,12 +113,19 @@ public class TicTacToe {
 		Scanner sc = new Scanner(System.in);
 		char playerLetter = sc.next().charAt(0);
 		char computerSymbol = tictactoe.chooseSymbolForPlayer(playerLetter);
+		String first = tictactoe.checkWhoPlaysFirst();
+		System.out.println("here who Plays first: " + first);
 		System.out.println("Player Letter is : " + playerLetter);
 		System.out.println("Computer Letter is : " + computerSymbol);
 		tictactoe.playerMakeMove(sc, playerLetter);
 		tictactoe.playerMakeMove(sc, computerSymbol);
 		tictactoe.showBoard();
-		String first = tictactoe.checkWhoPlaysFirst();
-		System.out.println("here who Plays first: " + first);
+		boolean winner = tictactoe.getWinner(playerLetter);
+		while (!winner) {
+			tictactoe.playerMakeMove(sc, playerLetter);
+			winner= tictactoe.getWinner(playerLetter);
+		}
+		System.out.println("Congulations Player won ");
+
 	}
 }
